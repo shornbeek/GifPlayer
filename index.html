@@ -1,84 +1,10 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-<script>
-
-  var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=yDCCeSvcpPbQ6VyCgzSv1zTTlb8gLQIx&limit=5");
-xhr.done(function(data) { console.log("success got data", data); });
-    
-     
-
-</script>
-
-</html> -->
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Actions Gifs</title>
     <!-- Latest compiled and minified CSS & JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-    <style>
-    body{
-	background: url("../images/background.jpg");
-	background-size: 100%;
-    background-repeat: no-repeat;
-    color: black;
-}
-* {
-	box-sizing: border-box;
-}
-img { 
-    height: 150px;
-    width: 150px;
-}
-.btn {
-    /* adding spacing between each button*/
-    margin: 3px;
-    background-color: #999999;
-    border-color: #fff;
-}
-.gifDiv{
-    /* making the images go in one line rather than block & adding spacing between the images*/
-    float: left;
-    margin: 3px;
-}
-.container {
-	background-color: #fff;
-	opacity: 0.8;
-	padding: 20px;
-}
-.jumbotron {
-    background-color: inherit;
-}
-.jumbotron .h1, .jumbotron h1 {
-    text-align: center;
-}
-#copyright{
-	font-size: 14px;
-}
-div#footer {
-	clear: both;
-	margin-top: 40px;
-	position: center;
-	bottom: 0;
-	left: 0;
-	text-align: center;
-}
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
@@ -87,25 +13,24 @@ div#footer {
             <h1>Build A Gif!</h1>
         </div>
   
-    <!-- Buttons  -->
     <div id="gifButtonsView" class="container">
     </div>
-     <!-- Main Container  -->
+ 
     <div class="container">
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-            <!-- Gifs  -->
+        <div class="col-xs-12 col-sm-9">
+       
             <div id="gifsView"></div>
+        
         </div>
          <!-- Action Submission Form  -->
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-3">
             <form id="gif-form" role="form">
-                <h2><legend>Action Submission</legend></h2>
+                <h2>Make A gif button</h2>
                 <div class="form-group">
-                    <label for="action-input">Add your action below</label>
+                    <!-- <label for="action-input">Add your action below</label> -->
                     <input type="text" id="action-input">
                 </div>
-                <input id="addGif" type="submit" value="Add your action" class="btn btn-primary">
-                <input id="removeGif" type="submit" value="Remove last action" class="btn btn-primary">
+                <input id="addGif" type="submit" value="MAKE GIF BUTTON" class="btn btn-primary">
             </form>    
         </div>
     </div>
@@ -116,108 +41,8 @@ div#footer {
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript" src="assets/javascript/javascript.js"></script> -->
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
 
 
-<script>
-
-    $( document ).ready(function() {
-
-var gifArray = ["Run", "Fall", "Fail", "Ninja", "Love", "Party Rock", "John Candy", "Music", "Rick and Morty", "Simpsons", "Skynig", "Crying", "Fighting","Dancing", "Car Crash", "Flip"];
-
-function displayGifButtons(){
-    $("#gifButtonsView").empty();
-    for (var i = 0; i < gifArray.length; i++){
-        var buttonGif = $("<button>");
-        
-        buttonGif.addClass("action");
-        buttonGif.addClass("btn btn-primary")
-        buttonGif.attr("data-name", gifArray[i]);
-        buttonGif.text(gifArray[i]);
-        
-        $("#gifButtonsView").append(buttonGif);
-    }
-}
-
-
-// Function to add a new action button
-function addNewButton(){
-    $("#addGif").on("click", function(){
-    var action = $("#action-input").val().trim();
-    if (action == ""){
-      return false; 
-    }
-    gifArray.push(action);
-
-    displayGifButtons();
-    return false;
-    });
-}
-// Function to remove last action button
-    // Doesnt work properly yet removes all of the added buttons
-    // rather than just the last
-function removeLastButton(){
-    $("removeGif").on("click", function(){
-    gifArray.pop(action);
-    displayGifButtons();
-    return false;
-    });
-}
-// Function that displays all of the gifs
-function displayGifs(){
-    var action = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + action + "&api_key=yDCCeSvcpPbQ6VyCgzSv1zTTlb8gLQIx&limit=20";
-    console.log(queryURL); // displays the constructed url
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    })
-    .done(function(response) {
-        console.log(response); // console test to make sure something returns
-        $("#gifsView").empty(); // erasing anything in this div id so that it doesnt keep any from the previous click
-        var results = response.data; //shows results of gifs
-        if (results == ""){
-          alert("There isn't a gif for this selected button");
-        }
-        for (var i=0; i<results.length; i++){
-
-            var gifDiv = $("<div>"); //div for the gifs to go inside
-            gifDiv.addClass("gifDiv");
-            // pulling rating of gif
-            var gifRating = $("<p>").text("Rating: " + results[i].rating);
-            gifDiv.append(gifRating);
-            // pulling gif
-            var gifImage = $("<img>");
-            gifImage.attr("src", results[i].images.fixed_height_small_still.url); // still image stored into src of image
-            gifImage.attr("data-still",results[i].images.fixed_height_small_still.url); // still image
-            gifImage.attr("data-animate",results[i].images.fixed_height_small.url); // animated image
-            gifImage.attr("data-state", "still"); // set the image state
-            gifImage.addClass("image");
-            gifDiv.append(gifImage);
-            // pulling still image of gif
-            // adding div of gifs to gifsView div
-            $("#gifsView").prepend(gifDiv);
-        }
-    });
-}
-// Calling Functions & Methods
-displayGifButtons(); // displays list of gifArray already created
-addNewButton();
-removeLastButton();
-// Document Event Listeners
-$(document).on("click", ".action", displayGifs);
-$(document).on("click", ".image", function(){
-    var state = $(this).attr('data-state');
-    if ( state == 'still'){
-        $(this).attr('src', $(this).data('animate'));
-        $(this).attr('data-state', 'animate');
-    }else{
-        $(this).attr('src', $(this).data('still'));
-        $(this).attr('data-state', 'still');
-    }
-});
-});
-
-</script>
