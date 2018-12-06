@@ -19,7 +19,7 @@ function showGifTag(){
 
 
 // Function to add a new action button
-function addNewButton(){
+function newButt(){
     $("#addGif").on("click", function(){
     var action = $("#action-input").val().trim();
     if (action == ""){
@@ -31,16 +31,7 @@ function addNewButton(){
     return false;
     });
 }
-// Function to remove last action button
-    // Doesnt work properly yet removes all of the added buttons
-    // rather than just the last
-function removeLastButton(){
-    $("removeGif").on("click", function(){
-    gifArray.pop(action);
-    showGifTag();
-    return false;
-    });
-}
+
 // Function that displays all of the gifs
 function displayGifs(){
     var action = $(this).attr("data-name");
@@ -78,10 +69,10 @@ function displayGifs(){
         }
     });
 }
-// Calling Functions & Methods
+// Calling Functions
 showGifTag(); // displays list of gifArray already created
-addNewButton();
-removeLastButton();
+newButt();
+
 // Document Event Listeners
 $(document).on("click", ".action", displayGifs);
 $(document).on("click", ".image", function(){
@@ -89,7 +80,9 @@ $(document).on("click", ".image", function(){
     if ( state == 'still'){
         $(this).attr('src', $(this).data('animate'));
         $(this).attr('data-state', 'animate');
+    
     }else{
+
         $(this).attr('src', $(this).data('still'));
         $(this).attr('data-state', 'still');
     }
